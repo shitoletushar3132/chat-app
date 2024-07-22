@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { PiUserCircle } from "react-icons/pi";
 import Avatar from "../components/Avatar";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../redux/userSlice";
 
 const CheckPasswordPage = () => {
   const [data, setData] = useState({
@@ -12,24 +14,24 @@ const CheckPasswordPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!location?.state?.name) {
       navigate("/email");
     }
-  }, [navigate]);
+  }, [navigate, location]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
-    setData((preve) => {
-      return { ...preve, [name]: value };
+    setData((prev) => {
+      return { ...prev, [name]: value };
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    e.stopPropagation();
 
     const URL = `${process.env.REACT_APP_BACKEND_DOMAIN}/api/password`;
 
@@ -40,17 +42,25 @@ const CheckPasswordPage = () => {
         data: { userId: location?.state?._id, password: data.password },
         withCredentials: true,
       });
-      toast.success(response?.data?.message);
-      console.log("response", response);
+
+      console.log("API Response: ", response?.data?.token);
+
       if (response?.data?.success) {
+        toast.success(response?.data?.message);
+        dispatch(setToken({ token: response?.data?.token }));
+        localStorage.setItem("token", response?.data?.token);
         setData({
           password: "",
         });
-
         navigate("/");
+      } else {
+        toast.error("Login failed. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      console.error("API Error: ", error);
+      toast.error(
+        error?.response?.data?.message || "An error occurred. Please try again."
+      );
     }
   };
 
