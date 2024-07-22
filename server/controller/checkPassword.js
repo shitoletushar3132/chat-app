@@ -18,7 +18,7 @@ async function checkPassword(req, res) {
 
     if (!verifyPassword) {
       return res.status(400).json({
-        message: "Please Check Password",
+        message: "Please check password",
         error: true,
       });
     }
@@ -34,11 +34,12 @@ async function checkPassword(req, res) {
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure only in production
-      sameSite: "None", // Necessary for cross-origin requests
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // SameSite=None only in production
+      maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
     };
 
     return res.cookie("token", token, cookieOptions).status(200).json({
-      message: "Login Successful",
+      message: "Login successful",
       success: true,
       token: token,
     });
