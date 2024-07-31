@@ -17,7 +17,6 @@ const SearchUser = ({ onClose }) => {
       setLoading(true);
       const response = await axios.post(URL, { search: searchTerm });
       setSearchUser(response?.data?.data);
-      console.log("response", response.data.data);
     } catch (error) {
       toast.error(error?.response?.data?.message || "An error occurred");
     } finally {
@@ -34,7 +33,7 @@ const SearchUser = ({ onClose }) => {
   }, [search]);
 
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2">
+    <div className="fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10">
       <div className="w-full max-w-lg mx-auto mt-10">
         <div className="bg-white rounded h-14 overflow-hidden flex ">
           <input
