@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const [editUserOpen, setEditUserOpen] = useState(false);
   const [allUser, setAllUser] = useState([]);
-  const [openSearchUser, setOpenSearchUser] = useState(true);
+  const [openSearchUser, setOpenSearchUser] = useState(false);
 
   return (
     <div className="w-full h-full grid grid-cols-[48px,1fr] bg-white">
