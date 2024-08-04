@@ -18,6 +18,7 @@ const Home = () => {
   const location = useLocation();
 
   console.log("user", user);
+
   const fetchUserDetails = async () => {
     try {
       const URL = `${process.env.REACT_APP_BACKEND_DOMAIN}/api/user-details`;
@@ -38,6 +39,9 @@ const Home = () => {
 
   useEffect(() => {
     fetchUserDetails();
+    if (!localStorage.getItem("token")) {
+      navigate("/email");
+    }
   }, []);
 
   // socket Connection
