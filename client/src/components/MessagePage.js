@@ -164,11 +164,11 @@ const MessagePage = () => {
       <section className="h-[calc(100vh-128px)] overflow-x-hidden overflow-y-scroll relative bg-slate-200 bg-opacity-50">
         {/* all messages show here */}
         <div ref={currentMessage} className="flex flex-col gap-2 py-2 mx-1">
-          {allMessage.map((msg, index) => {
+          {allMessage?.map((msg, index) => {
             return (
               <div
                 className={`bg-white p-1 py-1 w-fit rounded  max-w-[250px] md:max-w-sm lg:max-w-md ${
-                  user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : ""
+                  user?._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : ""
                 }`}
               >
                 <div className="w-full">
@@ -187,9 +187,9 @@ const MessagePage = () => {
                     />
                   )}
                 </div>
-                <p className="px-2">{msg.text}</p>
+                <p className="px-2">{msg?.text}</p>
                 <p className="text-xs ml-auto w-fit">
-                  {moment(msg.createdAt).format("hh.mm")}
+                  {moment(msg?.createdAt).format("hh.mm")}
                 </p>
               </div>
             );
@@ -205,7 +205,7 @@ const MessagePage = () => {
             </div>
             <div className="bg-white p-3">
               <img
-                src={message.imageUrl}
+                src={message?.imageUrl}
                 alt="Uploaded"
                 className="object-contain max-w-full max-h-full"
               />
@@ -222,7 +222,7 @@ const MessagePage = () => {
             </div>
             <div className="bg-white p-3">
               <video
-                src={message.videoUrl}
+                src={message?.videoUrl}
                 className="object-contain max-w-full max-h-full"
                 controls
                 muted

@@ -29,7 +29,7 @@ const Sidebar = () => {
     if (socketConnection) {
       socketConnection.emit("sidebar", user._id);
       socketConnection.on("conversation", (data) => {
-        const conversationUserData = data.map((conversationUser, index) => {
+        const conversationUserData = data?.map((conversationUser, index) => {
           if (
             conversationUser?.sender?._id === conversationUser?.receiver?._id
           ) {
@@ -45,7 +45,7 @@ const Sidebar = () => {
           } else {
             return {
               ...conversationUser,
-              userDetails: conversationUser.sender,
+              userDetails: conversationUser?.sender,
             };
           }
         });
@@ -129,11 +129,11 @@ const Sidebar = () => {
               </p>
             </div>
           )}
-          {allUser.map((conv, index) => {
+          {allUser?.map((conv, index) => {
             return (
               <NavLink
                 to={"/" + conv?.userDetails?._id}
-                key={conv._id}
+                key={conv?._id}
                 className="flex items-center gap-4 py-3 px-2 border border-transparent hover:border-primary rounded hover:bg-slate-100 cursor-pointer"
               >
                 <div>
