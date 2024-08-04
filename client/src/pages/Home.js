@@ -17,7 +17,6 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log("user", user);
 
   const fetchUserDetails = async () => {
     try {
@@ -54,7 +53,6 @@ const Home = () => {
     });
 
     socketConnection.on("onlineUser", (data) => {
-      console.log(data);
       dispatch(setOnlineUser(data));
     });
 

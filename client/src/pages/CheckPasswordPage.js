@@ -43,7 +43,6 @@ const CheckPasswordPage = () => {
         withCredentials: true,
       });
 
-      console.log("API Response: ", response?.data?.token);
 
       if (response?.data?.success) {
         toast.success(response?.data?.message);
