@@ -238,7 +238,7 @@ const MessagePage = () => {
         )}
       </section>
 
-      <section className="h-16 bg-white flex items-center px-4 border-t">
+      <section className="sticky bottom-0  h-16 bg-white flex items-center px-4 border-t">
         <div className="relative flex items-center w-full">
           <button
             className="flex justify-center items-center w-11 h-11 rounded-full hover:bg-primary hover:text-white"
